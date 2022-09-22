@@ -170,14 +170,123 @@ func main() {
 	// 	fmt.Println(y)
 	// }
 
-	for y := 0; y <= 1000; y++ {
-		if y != 0 && y%3 == 0 && y%7 == 0 && y%9 == 0 {
-			fmt.Println(y)
-			continue
-			// break
+	// for y := 0; y <= 1000; y++ {
+	// 	if y != 0 && y%3 == 0 && y%7 == 0 && y%9 == 0 {
+	// 		fmt.Println(y)
+	// 		continue
+	// 		// break
+	// 	}
+	// 	// else {
+	// 	// 	fmt.Println("N")
+	// 	// }
+	// }
+
+	///////////////////////////////// Switch Statement /////////////////////////////////
+	// ans := 2
+
+	// switch ans {
+	// case 1:
+	// 	fmt.Println("case one match")
+	// case 2:
+	// 	fmt.Println("case two match")
+	// default:
+	// 	fmt.Println("case no match")
+	// }
+
+	// switch {
+	// case ans <= 1:
+	// 	fmt.Println("case one match")
+	// case ans > 1:
+	// 	fmt.Println("case two match")
+	// default:
+	// 	fmt.Println("case no match")
+	// }
+
+	///////////////////////////////////////////////// Arrays ////////////////////////////////////////////////
+	// var arr [5]int
+	// arr[1] = 400
+	// arr[2] = 900
+	// fmt.Println(arr) // [0 400 900 0 0]
+	// sum := 0
+	// arr1 := [3]int{2, 3, 5}
+	// fmt.Println(arr1)      // [2 3 5]
+	// fmt.Println(len(arr1)) // 3
+	// for i := 0; i < len(arr1); i++ {
+	// 	sum += arr1[i]
+	// }
+	// fmt.Println(sum) // 10
+
+	// // 2d arrays
+	// arr2D := [2][3]int{{1, 2, 3}, {3, 4, 3}}
+	// fmt.Println(arr2D)       // [[1 2 3] [3 4 3]]
+	// fmt.Println(arr2D[1][2]) // 3
+
+	///////////////////////////////////////////////// Slices ////////////////////////////////////////////////
+
+	// var x [5]int = [5]int{1, 2, 3, 4, 5}
+	// fmt.Println(x) // [1 2 3 4 5]
+
+	// // slice
+	// var s []int = x[:]
+	// fmt.Println(s) // [1 2 3 4 5]
+
+	// s1 := x[1:3]
+	// fmt.Println(s1) // [2 3]
+
+	// // length
+	// fmt.Println(len(s1)) // 2
+	// // capacity
+	// fmt.Println(cap(s1)) // 4
+
+	// // reslice slice
+	// fmt.Println(s1[:cap(s1)]) // [2 3 4 5]
+	// fmt.Println(s1[1:])       // [3]
+	// fmt.Println(s1[2:])       // []
+
+	// slice
+	// var a []int = []int{3, 4, 5, 6, 7, 8}
+	// fmt.Println(a)          // [3 4 5 6 7 8]
+	// fmt.Println(a[:3])      // [3 4 5]
+	// fmt.Println(cap(a[:3])) // 6
+
+	// // append to slice
+	// a = append(a, 9)
+	// fmt.Println(a)
+	// b := append(a, 9)
+	// fmt.Println(b) // [3 4 5 6 7 8 9]
+
+	// // create slice with make function
+	// z := make([]int, 5)
+	// fmt.Println(z)      // [0 0 0 0 0]
+	// fmt.Printf("%T", z) // []int
+
+	/////////////////////////////////////////// Range & Slice/Array Examples ////////////////////////////////////
+	var slic []int = []int{1, 2, 3, 4, 4, 5, 6, 3, 5, 6, 7, 8, 9}
+
+	// for i := 0; i < len(slic); i++ {
+	// 	fmt.Println(slic[i])
+	// }
+
+	// range
+
+	// for index, element := range slic {
+	// 	fmt.Printf("%d: %d \n", index, element)
+	// }
+
+	// _ is a anonymous variable
+	// for i, ele := range slic {
+	// 	for j, ele1 := range slic {
+	// 		if ele == ele1 && j > i {
+	// 			fmt.Println(ele) // 3 4 5 6
+	// 		}
+	// 	}
+	// }
+	for i, ele := range slic {
+		for j := i + 1; j < len(slic); j++ {
+			ele2 := slic[j]
+			if ele2 == ele {
+				fmt.Println(ele) // 3 4 5 6
+			}
 		}
-		// else {
-		// 	fmt.Println("N")
-		// }
 	}
 }
