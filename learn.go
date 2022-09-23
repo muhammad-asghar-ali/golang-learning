@@ -261,7 +261,7 @@ func main() {
 	// fmt.Printf("%T", z) // []int
 
 	/////////////////////////////////////////// Range & Slice/Array Examples ////////////////////////////////////
-	var slic []int = []int{1, 2, 3, 4, 4, 5, 6, 3, 5, 6, 7, 8, 9}
+	// var slic []int = []int{1, 2, 3, 4, 4, 5, 6, 3, 5, 6, 7, 8, 9}
 
 	// for i := 0; i < len(slic); i++ {
 	// 	fmt.Println(slic[i])
@@ -281,12 +281,171 @@ func main() {
 	// 		}
 	// 	}
 	// }
-	for i, ele := range slic {
-		for j := i + 1; j < len(slic); j++ {
-			ele2 := slic[j]
-			if ele2 == ele {
-				fmt.Println(ele) // 3 4 5 6
-			}
-		}
-	}
+	// for i, ele := range slic {
+	// 	for j := i + 1; j < len(slic); j++ {
+	// 		ele2 := slic[j]
+	// 		if ele2 == ele {
+	// 			fmt.Println(ele) // 3 4 5 6
+	// 		}
+	// 	}
+	// }
+
+	///////////////////////////////////////////// Maps //////////////////////////////////////
+
+	// var mp map[string]int = map[string]int{
+	// 	"apple":  1,
+	// 	"pear":   2,
+	// 	"oanger": 3,
+	// }
+
+	// mp1 := map[string]int{
+	// 	"apple":  1,
+	// 	"pear":   2,
+	// 	"oanger": 3,
+	// }
+
+	// mp2 := make(map[string]int)
+	// fmt.Println(mp)  // map[apple:1 oanger:3 pear:2]
+	// fmt.Println(mp1) // map[apple:1 oanger:3 pear:2]
+	// fmt.Println(mp2) // map[]
+
+	// // access values
+	// value := mp1["apple"]
+	// fmt.Println(value) // 1
+	// // change value
+	// mp1["apple"] = 900
+	// fmt.Println(mp1) // map[apple:900 oanger:3 pear:2]
+	// // add values
+	// mp1["new add"] = 800
+	// fmt.Println(mp1) // map[apple:900 new add:800 oanger:3 pear:2]
+
+	// // delete value
+	// delete(mp1, "new add")
+	// fmt.Println(mp1) // map[apple:900 oanger:3 pear:2]
+
+	// // check the value
+	// value, ok := mp1["apple"]
+	// fmt.Println(value, ok) // 900 true
+
+	// val, ok := mp1["john"]
+	// fmt.Println(val, ok) // 0 false
+
+	// // length of map
+	// fmt.Println(len(mp1)) // 3
+
+	///////////////////////////////////////////// Functions //////////////////////////////////////
+	// test()      // function calling
+	// test1(12)   // 12
+	// add(12, 10) // 22
+	// ans := mul(12, 3)
+	// fmt.Println(ans) // 36
+
+	// sum, sub := math(2, 3)
+	// fmt.Println(sum, sub) // 5 -1
+
+	// mul, div := math1(8, 2)
+	// fmt.Println(mul, div) // 16 4
+
+	/////////////////////////////////////////// Advanced Function Concepts & Function Closures ///////////////////////////
+
+	// function as pass as a refenernce to variables
+	// ref := test
+	// ref() // function calling
+
+	// re := test1
+	// re(2) // 2
+
+	// test := func() {
+	// 	fmt.Println("inside main function")
+	// }
+	// test() // inside main function
+
+	// test1 := func(x int) {
+	// 	fmt.Println(x)
+	// }
+	// test1(3) // 3
+
+	// test2 := func(x int) int {
+	// 	return x * 2
+	// }(8)
+	// fmt.Println(test2) // 16
+
+	// test3 := func(x int) int {
+	// 	return x * 2
+	// }
+
+	// callback(test3) // 14
+
+	// //  Function Closures
+	// returnFunction("hello")()
+	// a := returnFunction("Good bye")
+	// a()
+
+	/////////////////////////////////////// Pointers & Derefrence Operator (& and *) //////////////////////////
+
+	// v := 7
+	// fmt.Println(&v) // 0xc000012088
+
+	// c := &v
+	// fmt.Println(c)  // 0xc000012088
+	// fmt.Println(*c) // 7
+	// *c = 10
+	// fmt.Println(*c) // 10
+	// fmt.Println(v)  // 10
+
+	toChage := "Hello"
+	var pointer *string = &toChage
+	fmt.Println(pointer, &pointer)  // 0xc000088220 0xc000006028
+	fmt.Println(*pointer, &pointer) // Hello 0xc000006028
+	change1(toChage)
+	fmt.Println(toChage)
+	change(&toChage)
+	fmt.Println(toChage)
+}
+
+func change(str *string) {
+	*str = "changed"
+}
+
+func change1(str string) {
+	str = "changed"
+}
+
+func test() {
+	fmt.Println("function calling")
+}
+
+func test1(x int) {
+	fmt.Println(x)
+}
+
+func add(x int, y int) {
+	fmt.Println(x + y)
+}
+
+func mul(a, b int) int {
+	return a * b
+}
+
+// return multi values
+func math(a, b int) (int, int) {
+	return a + b, a - b
+}
+
+// return values with labels
+func math1(a, b int) (mul int, div int) {
+	defer fmt.Println("call when the return") // print when the function returns
+	mul = a * b
+	div = a / b
+	fmt.Println("Before return")
+	return
+}
+
+//  Function Closures
+func returnFunction(x string) func() {
+	return func() { fmt.Println(x) }
+}
+
+func callback(myFunc func(int) int) {
+	fmt.Println(myFunc(7))
 }
