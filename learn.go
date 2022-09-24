@@ -393,14 +393,96 @@ func main() {
 	// fmt.Println(*c) // 10
 	// fmt.Println(v)  // 10
 
-	toChage := "Hello"
-	var pointer *string = &toChage
-	fmt.Println(pointer, &pointer)  // 0xc000088220 0xc000006028
-	fmt.Println(*pointer, &pointer) // Hello 0xc000006028
-	change1(toChage)
-	fmt.Println(toChage)
-	change(&toChage)
-	fmt.Println(toChage)
+	// toChage := "Hello"
+	// var pointer *string = &toChage
+	// fmt.Println(pointer, &pointer)  // 0xc000088220 0xc000006028
+	// fmt.Println(*pointer, &pointer) // Hello 0xc000006028
+	// change1(toChage)
+	// fmt.Println(toChage)
+	// change(&toChage)
+	// fmt.Println(toChage)
+
+	///////////////////////////////////////////////// Structs and Custom Types ////////////////////////////////
+	// var p Point = Point{1, 2, false}
+	// var p1 Point = Point{3, -6, true}
+	// p2 := Point{x: 2}
+	// fmt.Println(p)         // {1, 2, false}
+	// fmt.Println(p1)        // {3 -6, true}
+	// fmt.Println(p.x, p1.x) // 1 3
+	// fmt.Println(p2)
+
+	// // pass to as a pointer
+	// p3 := &Point{x: 3}
+	// fmt.Println(p3) // &{3 0 false}
+	// ChangeX(p3)
+	// fmt.Println(p3) // &{100 0 false}
+
+	// p4 := Point{x: 3}
+	// fmt.Println(p4) // {3 0 false}
+	// ChangeNoP(p4)
+	// fmt.Println(p4) // {3 0 false}
+
+	// // nested struct
+	// c := Circle{4.3, p3}
+	// fmt.Println(c) // {4.3 0xc000016228}
+	// c1 := Circle{4.3, &Point{4, 5, true}}
+	// fmt.Println(c1)               // {4.3 0xc000016228}
+	// fmt.Println(c1.point)         // &{4 5 true}
+	// fmt.Println(c1.point.isGrade) // true
+
+	//////////////////////////////////////// Struct Methods ///////////////////////////////////////////////
+	s1 := Student{"john", []int{60, 70, 80, 80}, 19}
+	// fmt.Println(s1) // {john [60 70 80 80] 19}
+	// s1.setAge(22)
+	// fmt.Println(s1) // {john [60 70 80 80] 22}
+	// s1.setAgeNo(21)
+	// fmt.Println(s1) //{john [60 70 80 80] 19}
+
+	avg := s1.getAverage()
+	fmt.Println(avg) // 72.5
+
+	max := s1.getMaxGrade()
+	fmt.Println(max) // 80
+}
+
+type Student struct {
+	name  string
+	grade []int
+	age   int
+}
+
+func (s *Student) setAge(age int) {
+	s.age = age
+}
+
+func (s Student) setAgeNo(age int) {
+	s.age = age
+}
+
+func (s Student) getAverage() float32 {
+	sum := 0
+	for _, v := range s.grade {
+		sum += v
+	}
+	return float32(sum) / float32(len(s.grade))
+}
+
+func (s Student) getMaxGrade() int {
+	max := 0
+	for _, v := range s.grade {
+		if max < v {
+			max = v
+		}
+	}
+	return max
+}
+
+func ChangeX(pt *Point) {
+	pt.x = 100
+}
+
+func ChangeNoP(pt Point) {
+	pt.x = 100
 }
 
 func change(str *string) {
@@ -448,4 +530,16 @@ func returnFunction(x string) func() {
 
 func callback(myFunc func(int) int) {
 	fmt.Println(myFunc(7))
+}
+
+///////////////////////////////////////////////// Structs
+type Point struct {
+	x       int
+	y       int
+	isGrade bool
+}
+
+type Circle struct {
+	redius float64
+	point  *Point
 }
